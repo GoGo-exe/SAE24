@@ -107,7 +107,7 @@ $data_poste = $statement->fetchAll();
 
 
 <h2>Ajouter un employé</h2>
-
+testes
 <form method="post">
 
     <!--Formulaire du NOM -->
