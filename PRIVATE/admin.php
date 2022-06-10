@@ -27,11 +27,11 @@
                     <div class="large-4 medium-4 cell"> 
                         <div class="callout">
 
-                            <p>En utilisant ce lien, vous pourrez ajouter un client dans la base de données</p>
+                            <p>En utilisant ce lien, vous pourrez gérer les employés </p>
 
                             <!-- Grid Example -->
                             <div class="large-4 medium-4 cell">
-                                <p><a href="create.php" class="button"><strong>Nouveau client</strong></a><br/></p>
+                                <p><a href="Gestion/Employes" class="button"><strong>Employés</strong></a><br/></p>
 
                             </div>
                         </div>
@@ -39,11 +39,11 @@
 
                     <div class="large-4 medium-4 cell">
                         <div class="callout">
-                            <p>En utilisant ce lien, vous pourrez ajouter un produit dans la base de données</p>
+                            <p>En utilisant ce lien, vous pourrez gérer les missions</p>
 
                             <!-- Grid Example -->
                             <div class="large-4 medium-4 cell">
-                                <p><a href="new_produit.php" class="alert button"><strong>Nouveau produit</strong></a><br/></p>
+                                <p><a href="new_produit.php" class="alert button"><strong>Missions</strong></a><br/></p>
                             </div>
                         </div>
                     </div>
@@ -53,24 +53,8 @@
                             <p>En utilisant ce lien, vous pourrez effectuer une commande</p>
 
                             <!-- Grid Example -->
-                            <div class="large-4 medium-4 cell">
-                                <p><a href="../PUBLIQUE/commande.php" class="button"><strong>Commander</strong></a><br/></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="large-4 medium-4 cell">
-                        <div class="callout">
-                            <p>En utilisant ce lien, vous pourrez supprimer une client</p>
-
-                            <!-- Grid Example -->
-                            <div class="large-4 medium-4 cell">
-                                <p><a href="delete_client.php" class="alert button"><strong>Supprimer</strong></a><br/></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="large-4 medium-4 cell">
-                        <div class="callout">
-                            <p>En utilisant ce lien, vous pourrez supprimer un produit</p>
+                          
+                    
 
                             <!-- Grid Example -->
                             <div class="large-4 medium-4 cell">
