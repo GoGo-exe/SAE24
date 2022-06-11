@@ -1,44 +1,99 @@
-<?php
-   @$login=$_POST["login"];
-   $erreur="";
-   if(isset($_POST["valider"])){
-         include("connexion.php");
-         
-        $ins=$pdo->prepare("DELETE FROM Produit WHERE code_produit='$login';");
-        if($ins->execute()) 
-        echo $login;  
-      }
+
+<?php include "../../../PRIVATE/private_templates/header.php";
 ?>
-<!DOCTYPE html>
-<html>
-   <head>
-      <meta charset="utf-8" />
-      <style>
-         *{
-            font-family:arial;
-         }
-         body{
-            margin:20px;
-         }
-         input{
-            border:solid 1px #2222AA;
-            margin-bottom:10px;
-            padding:16px;
-            outline:none;
-            border-radius:6px;
-         }
-         .erreur{
-            color:#CC0000;
-            margin-bottom:10px;
-         }
-      </style>
-   </head>
-   <body>
-      <h1>Supprimer produit</h1>
-      <div class="erreur"><?php echo $erreur ?></div>
-      <form name="fo" method="post" action="">
-         <input type="text" name="login" placeholder="code produit" value="<?php echo $login?>" /><br />
-         <input type="submit" name="valider" value="Supprimer" />
-      </form>
-   </body>
-</html>
+
+<?php
+require "../../../config.php";
+if (isset($_POST['submit'])) {
+
+    try  {
+        $connection = new PDO($dsn, $username, $password, $options);
+        
+        $new_adresse = array(
+            "note" => $_POST['note'],
+        );
+
+        $prenom=$_POST['prenom'];
+        $poste= $_POST['poste'];
+
+        $sql = "DELETE FROM Employés WHERE id_emp='$prenom' AND poste ='$poste';";
+
+        $statement = $connection->prepare($sql);
+        $statement->execute($new_adresse);
+    } catch(PDOException $error) {
+        echo $sql . "<br>" . $error->getMessage();
+    }
+}
+?>
+
+<!------------------------------------Requête SQL PRENOM-------------------------------------------->
+<?php 
+
+try  {
+    $connection = new PDO($dsn, $username, $password, $options);
+    
+    $sql = sprintf(
+            "SELECT id_emp,prenom FROM Employés;"
+    );
+    
+    $statement = $connection->prepare($sql);
+    $statement->execute($new_user);
+} catch(PDOException $error) {
+    echo $sql . "<br>" . $error->getMessage();
+}
+
+$data_prenom = $statement->fetchAll();
+
+?>
+<!------------------------------------Requête SQL POSTE-------------------------------------------->
+<?php 
+
+try  {
+    $connection = new PDO($dsn, $username, $password, $options);
+    
+    $sql = sprintf(
+            "SELECT id_poste,nom FROM Postes;"
+    );
+    
+    $statement = $connection->prepare($sql);
+    $statement->execute($new_user);
+} catch(PDOException $error) {
+    echo $sql . "<br>" . $error->getMessage();
+}
+
+$data_poste = $statement->fetchAll();
+
+?>
+<!------------------------------------------------------------------------------------------->
+
+Virer un employé !
+</br>
+</br>
+<form method="post">
+
+    <!--Formulaire du DEPARTEMENT -->
+    <label for="departement-select">Son prénom ? </label>
+    <select name="prenom" id="poste-select">
+   <?php
+    foreach($data_prenom as $cc => $name) {
+            echo '<option value="' . $name['id_emp'] . '">' .  $name["prenom"] . '</option>';
+            } 
+        ?>
+    </select><br /><br />
+
+    <!--Formulaire du POSTE -->
+    <label for="post-select">Le poste ? </label>
+    <select name="poste" id="poste-select">
+       <?php
+    foreach($data_poste as $cc3 => $name) {
+            echo '<option value="' . $name['id_poste'] . '">' .  $name["nom"] . '</option>';
+            } 
+        ?>
+    </select><br /><br />
+
+    <!--Bouton de VALIDATION -->
+    <input type="submit" name="submit" value="DEHORS !"><br />
+</form>
+
+<a href="index.php">Retourner au menu</a>
+
