@@ -1,33 +1,4 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <style>
-         *{
-            font-family:arial;
-         }
-         body{
-            margin:20px;
-         }
-         input{
-            border:solid 1px #2222AA;
-            margin-bottom:10px;
-            padding:16px;
-            outline:none;
-            border-radius:6px;
-         }
-         .erreur{
-            color:#CC0000;
-            margin-bottom:10px;
-         }
-      </style>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-</head>
-<body>
-    
 <?php
  require "../../../config.php";
  require "../../../common.php";
@@ -46,8 +17,9 @@ if (isset($_POST['submit'])) {
         $poste= $_POST['poste'];
         $mail= $_POST['mail'];
         $salaire= $_POST['salaire'];
+        $sexe = $_POST['sexe'];
 
-        $sql = "INSERT INTO Employés (nom,prenom,departement,poste,mail,salaire) VALUES ('$nom','$prenom','$departement','$poste','$mail','$salaire');";
+        $sql = "INSERT INTO Employés (nom,prenom,sexe,id_dep,poste,mail,salaire) VALUES ('$nom','$prenom','$sexe','$departement','$poste','$mail','$salaire');";
 
         
         $statement = $connection->prepare($sql);
@@ -84,7 +56,7 @@ try  {
 $data = $statement->fetchAll();
 
 ?>
-<!------------------------------------Requête SQL DEPARTEMENT-------------------------------------------->
+<!------------------------------------Requête SQL POSTES-------------------------------------------->
 <?php 
 
 try  {
@@ -107,7 +79,6 @@ $data_poste = $statement->fetchAll();
 
 
 <h2>Ajouter un employé</h2>
-testes
 <form method="post">
 
     <!--Formulaire du NOM -->
@@ -117,6 +88,13 @@ testes
      <!--Formulaire du PRENOM -->
     <label for="text">Prénom</label>
     <input type="text" name="prenom" id="prenom"><br />
+
+    <!--Formulaire du SEXE -->
+    <label for="sexe-select">Sexe ?</label>
+    <select name="sexe" id="sexe">
+    <option value="homme">Homme</option>
+    <option value="femme">Femme</option>
+    </select><br /><br />
 
     <!--Formulaire du DEPARTEMENT -->
     <label for="departement-select">Le département ? </label>
