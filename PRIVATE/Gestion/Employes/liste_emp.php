@@ -39,19 +39,27 @@ if (isset($_POST['validation'])) {
         $data = $statement -> fetchAll();
         
         foreach($data as $cc2 => $name) {
-        echo"<tr><td>{$name['nom']}</td><td> {$name['prenom']} </td><td> {$name['sexe']} </td><td> {$name['nom_postes']} </td><td> {$name['nom_dep']}</td> <td> {$name['mail']} </td><td> {$name['date_recrutement']} </td><td> {$name['salaire']} </td>\n";
+            ?>
+            <center>
+            <table border = '1'>
+            <tr><td><strong> Nom </strong></td> <td><strong> Prénom </strong></td><td><strong>Sexe </strong></td> <td><strong> Poste </strong></td> <td><strong> Département </strong></td> 
+            <td><strong> Mail </strong></td> <td><strong> Date de recrutement </strong></td><td><strong> Salaire </strong></td></tr>
+            <center>
+            <?php
+        echo"<tr><td>{$name['nom_emp']}</td><td> {$name['prenom']} </td><td> {$name['sexe']} </td><td> {$name['nom_postes']} </td><td> {$name['nom_dep']}</td> <td> {$name['mail']} </td><td> {$name['date_recrutement']} </td><td> {$name['salaire']} </td></tr></table>\n";
         }
 
     } catch(PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();
     }
 }
+
 //------------------------------------------------------------------------------------------
 
 $sql = "SELECT *,Employés.nom AS nom_emp,Département.nom AS nom_dep,Postes.nom AS nom_postes FROM Employés INNER JOIN Département ON Employés.id_dep = Département.id_dep INNER JOIN Postes ON Employés.poste = Postes.id_poste;";
 $result = mysqli_query($db,$sql) or die ("bad query");
 ?>
-
+</br></br>
 <center><table border = '1'>
 
 <tr><td><strong> Nom </strong></td> <td><strong> Prénom </strong></td><td><strong>Sexe </strong></td> <td><strong> Poste </strong></td> <td><strong> Département </strong></td> 

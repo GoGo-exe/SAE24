@@ -94,6 +94,10 @@ $data_poste = $statement->fetchAll();
     <select name="sexe" id="sexe">
     <option value="homme">Homme</option>
     <option value="femme">Femme</option>
+    <option value="gender-fluide">Gender-fluide</option>
+    <option value="robot">Robot</option>
+    <option value="grenouille">Grenouille</option>
+    <option value="autre">Autre</option>
     </select><br /><br />
 
     <!--Formulaire du DEPARTEMENT -->
