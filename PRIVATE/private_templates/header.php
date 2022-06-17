@@ -30,19 +30,6 @@
 
 <body>
 
-<nav>
-        <div class = "onglets">
-            <a>Truc<a>
-            <a>truc<a>
-            <a>Nous contacter<a>
-        </div>
-
-        <div class = "buttons">
-            <button class="login"> J'ai déja un compte</button>
-            <button class="login"> Truc </button>
-        </div>
-</nav>
-
 <h1><center>Gestion TopoRun</center></h1>
 
 

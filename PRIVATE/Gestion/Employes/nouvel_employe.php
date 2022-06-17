@@ -1,4 +1,12 @@
-
+<?php
+  // Initialiser la session
+  session_start();
+  // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+  if(!isset($_SESSION["login"])){
+    header("Location: index.php");
+    exit(); 
+  }
+?>
 <?php
  require "../../../config.php";
  require "../../../common.php";
@@ -18,8 +26,9 @@ if (isset($_POST['submit'])) {
         $mail= $_POST['mail'];
         $salaire= $_POST['salaire'];
         $sexe = $_POST['sexe'];
+        $date_naissance=$_POST['naissance'];
 
-        $sql = "INSERT INTO Employés (nom,prenom,sexe,id_dep,poste,mail,salaire) VALUES ('$nom','$prenom','$sexe','$departement','$poste','$mail','$salaire');";
+        $sql = "INSERT INTO Employés (nom,prenom,date_naissance,sexe,id_dep,poste,mail,salaire) VALUES ('$nom','$prenom','$date_naissance','$sexe','$departement','$poste','$mail','$salaire');";
 
         
         $statement = $connection->prepare($sql);
@@ -109,6 +118,10 @@ $data_poste = $statement->fetchAll();
             } 
         ?>
     </select><br /><br />
+
+    <!--Formulaire de la DATE DE NAISSANCE -->
+    <input id="date" type="date" name=naissance value="2017-06-01">
+    </br>
 
     <!--Formulaire du POSTE -->
     <label for="post-select">Le poste ? </label>

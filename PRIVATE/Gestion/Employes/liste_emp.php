@@ -1,3 +1,12 @@
+<?php
+  // Initialiser la session
+  session_start();
+  // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+  if(!isset($_SESSION["login"])){
+    header("Location: index.php");
+    exit(); 
+  }
+?>
 <?php include "../../../PRIVATE/private_templates/header.php";
 ?>
 <?php
@@ -26,15 +35,13 @@ if (isset($_POST['validation'])) {
     try  {
         $connection = new PDO($dsn, $username, $password, $options);
         
-        $new_adresse = array(
-            "note" => $_POST['note'],
-        );
+        
 
         $nom= $_POST['name'];
 
         $sql = "SELECT *,Employés.nom AS nom_emp,Département.nom AS nom_dep,Postes.nom AS nom_postes FROM Employés INNER JOIN Département ON Employés.id_dep = Département.id_dep INNER JOIN Postes ON Employés.poste = Postes.id_poste WHERE Employés.nom='$nom';";
         $statement = $connection->prepare($sql);
-        $statement->execute($new_adresse);
+        $statement->execute();
 
         $data = $statement -> fetchAll();
         

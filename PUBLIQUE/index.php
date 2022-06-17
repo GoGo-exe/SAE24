@@ -9,7 +9,9 @@
     <title>Toporun</title>
 
     <!-- Bootstrap core CSS -->
+<link href="css/style.css" rel="stylesheet">
 <link href="bootstrap/bootstrap/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
 
     <style>
       .bd-placeholder-img {
@@ -32,9 +34,9 @@
     <link href="cover.css" rel="stylesheet">
   </head>
   <body class="d-flex h-100 text-center text-white bg-dark">
-    
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="mb-auto">
+  
+  <header id='tete_page' class="mb-auto">
     <div>
       <h3 class="float-md-start mb-0"><img src="images/TopoRUn-14-06-2022.png" alt="failed"></h3>
       <nav class="nav nav-masthead justify-content-center float-md-end">
@@ -42,12 +44,18 @@
         <a class="nav-link" href="#">Contact</a>
       </nav>
     </div>
+    </br></br></br></br></br></br></br></br></br></br></br>
   </header>
+
+  
+  
+    </br>
+    </br
 
   <main class="px-3">
   <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading">Bienvenue sur Toporun.</h2>
+        <h2 class="featurette-heading">Bienvenue sur TopoRun.</h2>
         </br>
         <p class="lead">TopoRun est un cabinet de <strong>géomètre topographe</strong>, qui propose son expertise dans un ensemble de domaines lié à la topographie. Nous siègons sur l'île de la Réunion et avons pour but d'analyser, préparer les terrains dans le but 
           de futures constructions.</p>
@@ -56,12 +64,11 @@
       </div>
       <div class="col-md-5">
         <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="0" height="0" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
-        <img src="images/topographie-2.jpg" alt="">
+    </br>
+        <img weight=100 height=300 src="images/topographie-2.jpg" alt="">
         </svg>
       </div>
     </div>
-    </br>
-    </br>
     </br>
     </br>
     <div class="row featurette">

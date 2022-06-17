@@ -1,3 +1,12 @@
+<?php
+  // Initialiser la session
+  session_start();
+  // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+  if(!isset($_SESSION["login"])){
+    header("Location: index.php");
+    exit(); 
+  }
+?>
 <?php include "../../../PRIVATE/private_templates/header.php";
 ?>
 <!DOCTYPE html>
@@ -62,7 +71,7 @@ try  {
     $connection = new PDO($dsn, $username, $password, $options);
     
     $sql = sprintf(
-            "SELECT COUNT(id_emp) FROM Employés INNER JOIN Département ON Employés.id_dep = Département.id_dep WHERE Département.nom = 'Autre';"
+            "SELECT COUNT(id_emp) FROM Employés INNER JOIN Département ON Employés.id_dep = Département.id_dep WHERE Département.nom = 'Direction';"
     );
     
     $statement = $connection->prepare($sql);
@@ -99,7 +108,23 @@ echo"</br>";
 ?>
 <!------------------------------------Requête SQL NOMBRE EMPLOYE Gestion Administrative et financière-------------------------------------------->
 <?php 
- require "../../../config.php";
+ if (isset($_POST['valider'])) {
+    try  {
+        $connection = new PDO($dsn, $username, $password, $options);
+        
+        $age= $_POST['nombre'];
+
+        $sql = "SELECT COUNT(id_emp) FROM Employés WHERE (YEAR(CURDATE())-YEAR(date_naissance)) < $age ;";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+
+        $data_age = $statement -> fetchAll();
+    }  catch(PDOException $error) {
+        echo $sql . "<br>" . $error->getMessage();
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 try  {
     $connection = new PDO($dsn, $username, $password, $options);
@@ -164,23 +189,58 @@ try  {
     }
     $nombre_chad = $statement->fetchAll();
     
-
-echo"</br>";echo"</br>";
-echo "Pourcentage de chad dans l'entreprise: " ;
+echo"</br>";
+echo "Pourcentage d'hommes dans l'entreprise: " ;
 $pourcentage_chad = $nombre_chad[0][0]*100/$nombre_employés[0][0];
 echo $pourcentage_chad;
 echo"</br>";
 
-echo "Pourcentage de femmelles dans l'entreprise: " ;
+echo "Pourcentage de femmes dans l'entreprise: " ;
 $pourcentage_femmelle = $nombre_femmelle[0][0]*100/$nombre_employés[0][0];
 echo $pourcentage_femmelle;
 
 echo"</br>";
 ?>
-
+<p>_____________________________________________</p>
+Entrez un âge:</br>
+<form method="post">
+<input type="number" name="nombre" value=0>
+<input type = "submit" name = "valider" value = "Rechercher">
+</form>
 </div>
 
+<?php 
+ if (isset($_POST['valider'])) {
+    try  {
+        $connection = new PDO($dsn, $username, $password, $options);
+        
+        $age= $_POST['nombre'];
 
+        $sql = "SELECT COUNT(id_emp) FROM Employés WHERE (YEAR(CURDATE())-YEAR(date_naissance)) < $age ;";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        $data_age_moins = $statement -> fetchAll();
+        echo "Nombre de personnes de moins de ".$age." ans: ". $data_age_moins[0][0] ."";
+
+        $sql = "SELECT COUNT(id_emp) FROM Employés WHERE (YEAR(CURDATE())-YEAR(date_naissance)) > $age ;";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        $data_age_plus = $statement -> fetchAll();
+
+        echo "</br>Nombre de personnes de plus de ".$age." ans: ". $data_age_plus[0][0] ."";
+
+        
+        $data_age_plus = $statement -> fetchAll();
+    }  catch(PDOException $error) {
+        echo $sql . "<br>" . $error->getMessage();
+    }
+   
+
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+?>
     
     
 </body>

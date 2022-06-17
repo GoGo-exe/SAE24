@@ -1,83 +1,64 @@
-<?php include "../PUBLIQUE/templates/header.php";
+<?php
+   session_start();
+   @$login=$_POST["login"];
+   @$pass=md5($_POST["pass"]);
+   @$valider=$_POST["valider"];
+   $erreur="";
+   if(isset($valider)){
+      include("../config.php");
+      $connection = new PDO($dsn, $username, $password, $options);
+      $sel=$connection->prepare("select * from Login_Boss where login=? and password=? limit 1");
+      $sel->execute(array($login,$pass));
+      $tab=$sel->fetchAll();
+      if(count($tab)>0){
+         $_SESSION["login"]=$_POST["login"];
+         //" ".strtoupper($tab[0]["nom"]);
+         header("location:admin.php");
+      }
+      else
+         $erreur="Mauvais login ou mot de passe!";
+   }
 ?>
-<!doctype html>
-<html class="no-js" lang="fr" dir="ltr">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADMIN</title>
-    <link rel="stylesheet" href="../PUBLIQUE/css/foundation.css">
-    <link rel="stylesheet" href="../PUBLIQUE/css/app.css">
-</head>
-
-<body>
-    <div class="fond">
-        <div class="grid-container">
-            <div class="grid-x grid-padding-x">
-                <div class="large-12 cell">
-                    <h1>Bienvenue dans l'espace personnel du chef de l'entreprise !</h1>
-                </div>
-            </div>
-
-            <div class="grid-x grid-padding-x">
-                <div class="grid-x grid-padding-x">
-
-                    <div class="large-4 medium-4 cell"> 
-                        <div class="callout">
-
-                            <p>En utilisant ce lien, vous pourrez gérer les employés </p>
-
-                            <!-- Grid Example -->
-                            <div class="large-4 medium-4 cell">
-                                <p><a href="Gestion/Employes" class="button"><strong>Employés</strong></a><br/></p>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="large-4 medium-4 cell">
-                        <div class="callout">
-                            <p>En utilisant ce lien, vous pourrez gérer les salaires</p>
-
-                            <!-- Grid Example -->
-                            <div class="large-4 medium-4 cell">
-                                <p><a href="Gestion/Salaires" class="alert button"><strong>Salaires</strong></a><br/></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="large-4 medium-4 cell">
-                        <div class="callout">
-                            <p>En utilisant ce lien, vous pourrez gérer les postes</p>
-
-                            <!-- Grid Example -->
-                            <div class="large-4 medium-4 cell">
-                                <p><a href="Gestion/Postes" class="alert button"><strong>Postes</strong></a><br/></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="large-4 medium-4 cell">
-                        <div class="callout">
-                            <p>En utilisant ce lien, vous pourrez gérer les missions</p>
-
-                            <!-- Grid Example -->
-                            <div class="large-4 medium-4 cell">
-                                <p><a href="Gestion/Missions" class="alert button"><strong>Missions</strong></a><br/></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-
-
-        <script src="PUBLIQUE/js/vendor/jquery.js"></script>
-        <script src="PUBLIQUE/js/vendor/what-input.js"></script>
-        <script src="PUBLIQUE/js/vendor/foundation.js"></script>
-        <script src="PUBLIQUE/js/app.js"></script>
-    </div>
-</body>
-
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <style>
+         *{
+            font-family:arial;
+         }
+         body{
+            margin:20px;
+         }
+         input{
+            border:solid 1px #2222AA;
+            margin-bottom:10px;
+            padding:16px;
+            outline:none;
+            border-radius:6px;
+         }
+         .erreur{
+            color:#CC0000;
+            margin-bottom:10px;
+         }
+         a{
+            font-size:12pt;
+            color:#EE6600;
+            text-decoration:none;
+            font-weight:normal;
+         }
+         a:hover{
+            text-decoration:underline;
+         }
+      </style>
+   </head>
+   <body onLoad="document.fo.login.focus()">
+      <h1>Authentification [ <a href="inscription.php">Créer un compte</a> ]</h1>
+      <div class="erreur"><?php echo $erreur ?></div>
+      <form name="fo" method="post" action="">
+         <input type="text" name="login" placeholder="Login" /><br />
+         <input type="password" name="pass" placeholder="Mot de passe" /><br />
+         <input type="submit" name="valider" value="S'authentifier" />
+      </form>
+   </body>
 </html>
