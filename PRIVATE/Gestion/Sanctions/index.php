@@ -62,7 +62,7 @@ echo"</br>";
 
                             <!-- Grid Example -->
                             <div class="large-4 medium-4 cell">
-                                <p><a href="enlever_sanction.php" class="button"><strong>Enlever une sanction</strong></a><br/></p>
+                                <p><a href="enelever_santion.php" class="button"><strong>Enlever une sanction</strong></a><br/></p>
 
                             </div>
                         </div>

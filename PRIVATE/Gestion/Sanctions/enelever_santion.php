@@ -16,15 +16,12 @@ if (isset($_POST['submit'])) {
 
     try  {
         $connection = new PDO($dsn, $username, $password, $options);
-        
-        $new_adresse = array(
-            "note" => $_POST['note'],
-        );
+    
 
         $prenom=$_POST['prenom'];
-        $poste= $_POST['poste'];
+        $sanc= $_POST['sanction'];
 
-        $sql = "DELETE FROM Employés WHERE id_emp='$prenom' AND poste ='$poste';";
+        $sql = "DELETE FROM Sanction WHERE id_emp='$prenom' AND sanction ='$sanc';";
 
         $statement = $connection->prepare($sql);
         $statement->execute($new_adresse);
@@ -60,7 +57,7 @@ try  {
     $connection = new PDO($dsn, $username, $password, $options);
     
     $sql = sprintf(
-            "SELECT id_poste,nom FROM Postes;"
+            "SELECT sanction FROM Sanction;"
     );
     
     $statement = $connection->prepare($sql);
@@ -69,12 +66,11 @@ try  {
     echo $sql . "<br>" . $error->getMessage();
 }
 
-$data_poste = $statement->fetchAll();
+$data_sanc = $statement->fetchAll();
 
 ?>
 <!------------------------------------------------------------------------------------------->
-
-Virer un employé !
+Enlever une sanction !
 </br>
 </br>
 <form method="post">
@@ -91,16 +87,16 @@ Virer un employé !
 
     <!--Formulaire du POSTE -->
     <label for="post-select">La sanction ? </label>
-    <select name="poste" id="poste-select">
+    <select name="sanction" id="poste-select">
        <?php
-    foreach($data_poste as $cc3 => $name) {
-            echo '<option value="' . $name['id_poste'] . '">' .  $name["nom"] . '</option>';
+    foreach($data_sanc as $cc3 => $name) {
+            echo '<option value="' . $name['sanction'] . '">' .  $name["sanction"] . '</option>';
             } 
         ?>
     </select><br /><br />
 
     <!--Bouton de VALIDATION -->
-    <input type="submit" name="submit" value="DEHORS !"><br />
+    <input type="submit" name="submit" value="Enlever"><br />
 </form>
 
 <a href="index.php">Retourner au menu</a>

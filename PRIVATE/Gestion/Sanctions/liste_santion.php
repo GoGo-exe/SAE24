@@ -20,7 +20,7 @@ require "../../../config.php";
 <center> <h1>Liste des sanctions </center></h1>
 
 <?php
-$sql = "SELECT *,Employés.nom AS nom FROM Sanction INNER JOIN Employés ON Employés.id_emp = Sanction.id_emp;";
+$sql = "SELECT *,Employés.prenom AS nom FROM Sanction INNER JOIN Employés ON Employés.id_emp = Sanction.id_emp;";
 $result = mysqli_query($db,$sql) or die ("bad query");
 ?>
 </br></br>
