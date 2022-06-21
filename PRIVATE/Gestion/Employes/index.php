@@ -142,6 +142,144 @@ try  {
 $data_compte_admin_finance = $statement->fetchAll();
 echo "Gestion Administrative et financière: ". $data_compte_admin_finance[0][0] ."";
 ?>
+</br>
+</br>
+Nombre d'employés par catégories:
+</br>
+<!------------------------------------Requête SQL NOMBRE EMPLOYE Technicien-------------------------------------------->
+<?php 
+echo"</br>";
+ require "../../../config.php";
+
+try  {
+    $connection = new PDO($dsn, $username, $password, $options);
+    
+    $sql = sprintf(
+            "SELECT COUNT(id_emp) FROM Employés INNER JOIN Postes ON Employés.poste = Postes.id_poste WHERE Postes.nom = 'Technicien';"
+    );
+    
+    $statement = $connection->prepare($sql);
+    $statement->execute($new_user);
+} catch(PDOException $error) {
+    echo $sql . "<br>" . $error->getMessage();
+}
+
+$data_compte_direction = $statement->fetchAll();
+echo "Technicien: ". $data_compte_direction[0][0] ."";
+?>
+
+<!------------------------------------Requête SQL NOMBRE EMPLOYE Directeur-------------------------------------------->
+<?php 
+echo"</br>";
+ require "../../../config.php";
+
+try  {
+    $connection = new PDO($dsn, $username, $password, $options);
+    
+    $sql = sprintf(
+            "SELECT COUNT(id_emp) FROM Employés INNER JOIN Postes ON Employés.poste = Postes.id_poste WHERE Postes.nom = 'Secrétaire';"
+    );
+    
+    $statement = $connection->prepare($sql);
+    $statement->execute($new_user);
+} catch(PDOException $error) {
+    echo $sql . "<br>" . $error->getMessage();
+}
+
+$data_compte_direction = $statement->fetchAll();
+echo "Secrétaire: ". $data_compte_direction[0][0] ."";
+
+?>
+
+<!------------------------------------Requête SQL NOMBRE EMPLOYE Commercial-------------------------------------------->
+<?php 
+echo"</br>";
+ require "../../../config.php";
+
+try  {
+    $connection = new PDO($dsn, $username, $password, $options);
+    
+    $sql = sprintf(
+            "SELECT COUNT(id_emp) FROM Employés INNER JOIN Postes ON Employés.poste = Postes.id_poste WHERE Postes.nom = 'Commercial';"
+    );
+    
+    $statement = $connection->prepare($sql);
+    $statement->execute($new_user);
+} catch(PDOException $error) {
+    echo $sql . "<br>" . $error->getMessage();
+}
+
+$data_compte_direction = $statement->fetchAll();
+echo "Commercial: ". $data_compte_direction[0][0] ."";
+
+?>
+<!------------------------------------Requête SQL NOMBRE EMPLOYE Directeur-------------------------------------------->
+<?php 
+echo"</br>";
+ require "../../../config.php";
+
+try  {
+    $connection = new PDO($dsn, $username, $password, $options);
+    
+    $sql = sprintf(
+            "SELECT COUNT(id_emp) FROM Employés INNER JOIN Postes ON Employés.poste = Postes.id_poste WHERE Postes.nom = 'Directeur';"
+    );
+    
+    $statement = $connection->prepare($sql);
+    $statement->execute($new_user);
+} catch(PDOException $error) {
+    echo $sql . "<br>" . $error->getMessage();
+}
+
+$data_compte_direction = $statement->fetchAll();
+echo "Directeur: ". $data_compte_direction[0][0] ."";
+
+?>
+
+<!------------------------------------Requête SQL NOMBRE EMPLOYE Comptable-------------------------------------------->
+<?php 
+echo"</br>";
+ require "../../../config.php";
+
+try  {
+    $connection = new PDO($dsn, $username, $password, $options);
+    
+    $sql = sprintf(
+            "SELECT COUNT(id_emp) FROM Employés INNER JOIN Postes ON Employés.poste = Postes.id_poste WHERE Postes.nom = 'Comptable';"
+    );
+    
+    $statement = $connection->prepare($sql);
+    $statement->execute($new_user);
+} catch(PDOException $error) {
+    echo $sql . "<br>" . $error->getMessage();
+}
+
+$data_compte_direction = $statement->fetchAll();
+echo "Comptable: ". $data_compte_direction[0][0] ."";
+
+?>
+<!------------------------------------Requête SQL NOMBRE EMPLOYE DRH-------------------------------------------->
+<?php 
+echo"</br>";
+ require "../../../config.php";
+
+try  {
+    $connection = new PDO($dsn, $username, $password, $options);
+    
+    $sql = sprintf(
+            "SELECT COUNT(id_emp) FROM Employés INNER JOIN Postes ON Employés.poste = Postes.id_poste WHERE Postes.nom = 'DRH';"
+    );
+    
+    $statement = $connection->prepare($sql);
+    $statement->execute($new_user);
+} catch(PDOException $error) {
+    echo $sql . "<br>" . $error->getMessage();
+}
+
+$data_compte_direction = $statement->fetchAll();
+echo "DRH: ". $data_compte_direction[0][0] ."";
+
+?>
 
 <!------------------------------------Requête SQL Pourcentage HOMME/FEMME-------------------------------------------->
 <?php 

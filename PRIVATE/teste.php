@@ -50,7 +50,7 @@
       </style>
    </head>
    <body>
-      <h1>Inscription</h1>
+      <h1>Créer un compte admin</h1>
       <div class="erreur"><?php echo $erreur ?></div>
       <form name="fo" method="post" action="">
          <input type="text" name="login" placeholder="Login" value="<?php echo $login?>" /><br />

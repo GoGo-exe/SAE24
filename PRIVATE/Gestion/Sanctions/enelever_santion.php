@@ -7,9 +7,11 @@
     exit(); 
   }
 ?>
+<?php include "../../../PRIVATE/private_templates/header.php";
+?>
+
 <?php
- require "../../../config.php";
- require "../../../common.php";
+require "../../../config.php";
 if (isset($_POST['submit'])) {
 
     try  {
@@ -19,29 +21,18 @@ if (isset($_POST['submit'])) {
             "note" => $_POST['note'],
         );
 
-        
         $prenom=$_POST['prenom'];
-        $commentaire=$_POST['commentaire'];
-        $sanction=$_POST['sanction'];
-        $date_fin=$_POST['date_fin'];
+        $poste= $_POST['poste'];
 
-        $sql = "INSERT INTO Sanction (id_emp,commentaire,sanction,date_fin) VALUES ('$prenom','$sanction','$commentaire','$date_fin');";
+        $sql = "DELETE FROM Employés WHERE id_emp='$prenom' AND poste ='$poste';";
 
-        
         $statement = $connection->prepare($sql);
         $statement->execute($new_adresse);
     } catch(PDOException $error) {
-        echo $sql . "<br>" . $error->getMessage();
+        echo "employé deja sanctionné !";
     }
 }
 ?>
-
-<?php include "../../../PRIVATE/private_templates/header.php";
-?>
-
-<?php if (isset($_POST['submit']) && $statement) { ?>
-    <blockquote><?php echo $_POST['libelle']; ?> a été ajouté !</blockquote>
-<?php } ?>
 
 <!------------------------------------Requête SQL PRENOM-------------------------------------------->
 <?php 
@@ -58,17 +49,37 @@ try  {
 } catch(PDOException $error) {
     echo $sql . "<br>" . $error->getMessage();
 }
+
 $data_prenom = $statement->fetchAll();
+
 ?>
-<!-------------------------------------------------------------------------------->
+<!------------------------------------Requête SQL POSTE-------------------------------------------->
+<?php 
 
+try  {
+    $connection = new PDO($dsn, $username, $password, $options);
+    
+    $sql = sprintf(
+            "SELECT id_poste,nom FROM Postes;"
+    );
+    
+    $statement = $connection->prepare($sql);
+    $statement->execute($new_user);
+} catch(PDOException $error) {
+    echo $sql . "<br>" . $error->getMessage();
+}
 
-<h2>Ajouter un employé</h2>
+$data_poste = $statement->fetchAll();
+
+?>
+<!------------------------------------------------------------------------------------------->
+
+Virer un employé !
+</br>
+</br>
 <form method="post">
 
-   
-
-     <!--Formulaire du prenom -->
+    <!--Formulaire du DEPARTEMENT -->
     <label for="departement-select">Son prénom ? </label>
     <select name="prenom" id="poste-select">
    <?php
@@ -78,24 +89,19 @@ $data_prenom = $statement->fetchAll();
         ?>
     </select><br /><br />
 
-    <label for="mail">Commentaire</label>
-    <input type="text" name="commentaire" id="commentaire"><br />
+    <!--Formulaire du POSTE -->
+    <label for="post-select">La sanction ? </label>
+    <select name="poste" id="poste-select">
+       <?php
+    foreach($data_poste as $cc3 => $name) {
+            echo '<option value="' . $name['id_poste'] . '">' .  $name["nom"] . '</option>';
+            } 
+        ?>
+    </select><br /><br />
 
-    <label for="mail">Sanction</label>
-    <input type="text" name="sanction" id="sancttion"><br />
-
-    <label for="departement-select">Date de fin de sanction </label>
-    <input id="date" type="date" name="date_fin" value="2017-06-01">
-    </br>
-
-    <input type="submit" name="submit" value="Sanctionner"><br />
-
-   
+    <!--Bouton de VALIDATION -->
+    <input type="submit" name="submit" value="DEHORS !"><br />
+</form>
 
 <a href="index.php">Retourner au menu</a>
 
-        </form>
-
-
-</body>
-</html>

@@ -18,6 +18,29 @@
     <title>Gestion employés</title>
 </head>
 <body>
+
+<!------------------------------------Requête SQL NOMBRE sanction-------------------------------------------->
+<?php 
+echo"</br>";
+ require "../../../config.php";
+
+try  {
+    $connection = new PDO($dsn, $username, $password, $options);
+    
+    $sql = sprintf(
+            "SELECT COUNT(id_emp) FROM Sanction;"
+    );
+    
+    $statement = $connection->prepare($sql);
+    $statement->execute($new_user);
+} catch(PDOException $error) {
+    echo $sql . "<br>" . $error->getMessage();
+}
+
+$data_compte_sanction = $statement->fetchAll();
+echo"</br>";
+?>
+
     <center>
                 <div class="large-4 medium-4 cell"> 
                         <div class="callout">
@@ -39,10 +62,24 @@
 
                             <!-- Grid Example -->
                             <div class="large-4 medium-4 cell">
-                                <p><a href="virer_emp.php" class="button"><strong>Enlever une sanction</strong></a><br/></p>
+                                <p><a href="enlever_sanction.php" class="button"><strong>Enlever une sanction</strong></a><br/></p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>En utilisant ce lien, vous pourrez voir les sanctions </p>
+
+                            <!-- Grid Example -->
+                            <div class="large-4 medium-4 cell">
+                                <p><a href="liste_santion.php" class="button"><strong>Voir les sanctions</strong></a><br/></p>
 
                             </div>
                         </div>
                     </div>
                     </center>
+
+<?php
+echo "Nombre de sanctions: ". $data_compte_sanction[0][0] ."";
+?>
 </div>

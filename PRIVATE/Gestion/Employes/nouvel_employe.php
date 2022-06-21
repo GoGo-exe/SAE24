@@ -120,6 +120,7 @@ $data_poste = $statement->fetchAll();
     </select><br /><br />
 
     <!--Formulaire de la DATE DE NAISSANCE -->
+    <label for="departement-select">Date de naissance </label>
     <input id="date" type="date" name=naissance value="2017-06-01">
     </br>
 
